@@ -14,9 +14,10 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "module": "esnext",
+    "module": "NodeNext",
     "target": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    
   }
 }
