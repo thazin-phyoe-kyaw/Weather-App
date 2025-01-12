@@ -4,10 +4,22 @@ import { DefaultPageLayout } from "./components/ui/layout.js";
 import { ThemeProvider } from "./context/theme-provider.js";
 import WeatherPage from "./pages/weather-page.js";
 import CityPage from "./pages/city-page.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000, 
+        retry: false,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+  
   return (
-    
+    <QueryClientProvider  client={queryClient}>
     <BrowserRouter>
       <ThemeProvider defaultTheme="dark">
         <DefaultPageLayout>
@@ -18,6 +30,7 @@ const App = () => {
         </DefaultPageLayout>
       </ThemeProvider>
     </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 

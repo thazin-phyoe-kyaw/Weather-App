@@ -8,8 +8,11 @@
         "./src/*"
       ]
     },
+    "module": "esnext",
+    "target": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node", // or "nodenext"
     // ...
   }
 }
