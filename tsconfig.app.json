@@ -8,11 +8,13 @@
         "./src/*"
       ]
     },
-    "module": "Node16",
+    "module": "esnext",
     "target": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node16", // or "nodenext"
+    "moduleResolution": "node", 
+    
     // ...
-  }
+  },
+  "exclude": ["vite.config.ts"]
 }

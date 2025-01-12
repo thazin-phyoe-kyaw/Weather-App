@@ -1,0 +1,52 @@
+import React from 'react';
+import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
+import { Card, CardContent } from '@/components/ui/card';
+const CurrentWeather = ({ data, locationName }) => {
+    const { weather: [currentWeather], main: { temp, feels_like, temp_min, temp_max, humidity }, wind: { speed }, } = data;
+    const formatTemp = (temp) => `${Math.round(temp)}°`;
+    return (React.createElement(Card, { className: "overflow-hidden" },
+        React.createElement(CardContent, { className: "p-6" },
+            React.createElement("div", { className: "grid gap-6 md:grid-cols-2" },
+                React.createElement("div", { className: "space-y-4" },
+                    React.createElement("div", { className: "space-y-2" },
+                        React.createElement("div", { className: "flex items-center" },
+                            React.createElement("h2", { className: "text-2xl font-bold tracking-tight" }, locationName?.name),
+                            locationName?.state && (React.createElement("span", { className: "text-muted-foreground" },
+                                ", ",
+                                locationName.state))),
+                        React.createElement("p", { className: "text-sm text-muted-foreground" }, locationName?.country)),
+                    React.createElement("div", { className: "flex items-center gap-2" },
+                        React.createElement("p", { className: "text-7xl font-bold tracking-tighter" }, formatTemp(temp)),
+                        React.createElement("div", { className: "space-y-1" },
+                            React.createElement("p", { className: "text-sm font-medium text-muted-foreground" },
+                                "Feels like ",
+                                formatTemp(feels_like)),
+                            React.createElement("div", { className: "flex gap-2 text-sm font-medium" },
+                                React.createElement("span", { className: "flex items-center gap-1 text-blue-500" },
+                                    React.createElement(ArrowDown, { className: "h-3 w-3" }),
+                                    formatTemp(temp_min)),
+                                React.createElement("span", { className: "flex items-center gap-1 text-red-500" },
+                                    React.createElement(ArrowUp, { className: "h-3 w-3" }),
+                                    formatTemp(temp_max))))),
+                    React.createElement("div", { className: "grid grid-cols-2 gap-4" },
+                        React.createElement("div", { className: "flex items-center gap-2" },
+                            React.createElement(Droplets, { className: "h-4 w-4 text-blue-500" }),
+                            React.createElement("div", { className: "space-y-0.5" },
+                                React.createElement("p", { className: "text-sm font-medium" }, "Humidity"),
+                                React.createElement("p", { className: "text-sm text-muted-foreground" },
+                                    humidity,
+                                    "%"))),
+                        React.createElement("div", { className: "flex items-center gap-2" },
+                            React.createElement(Wind, { className: "h-4 w-4 text-blue-500" }),
+                            React.createElement("div", { className: "space-y-0.5" },
+                                React.createElement("p", { className: "text-sm font-medium" }, "Wind Speed"),
+                                React.createElement("p", { className: "text-sm text-muted-foreground" },
+                                    speed,
+                                    " m/s"))))),
+                React.createElement("div", { className: "flex flex-col items-center justify-center" },
+                    React.createElement("div", { className: "relative flex aspect-square w-full max-w-[200px] items-center justify-center" },
+                        React.createElement("img", { src: `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`, alt: currentWeather.description, className: "h-full w-full object-contain" }),
+                        React.createElement("div", { className: "absolute bottom-0 text-center" },
+                            React.createElement("p", { className: "text-sm font-medium capitalize" }, currentWeather.description))))))));
+};
+export default CurrentWeather;
